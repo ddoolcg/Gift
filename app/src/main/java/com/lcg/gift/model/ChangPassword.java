@@ -61,7 +61,7 @@ public class ChangPassword extends BaseObservableMe {
         HashMap<String, String> map = new HashMap<>();
         map.put("pwd", MD5.GetMD5Code(pwd));
         map.put("newPwd", MD5.GetMD5Code(newPwd));
-        Call call = HttpManager.getInstance().post(HttpUrl.CHANGE_PASSWORD, map, new BaseDataHandler<String, String>() {
+        Call call = HttpManager.getInstance().post(HttpUrl.PASSWORD, map, new BaseDataHandler<String, String>() {
             @Override
             public void onNetFinish() {
                 notifyProgressDialogdismiss();

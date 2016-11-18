@@ -3,12 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="login"
-            type="com.lcg.gift.model.Login" />
-    </data>
+    <data></data>
 
     <RelativeLayout
         android:id="@+id/activity_welcome"
@@ -18,42 +13,5 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.kt31xing.srxkt.WelcomeActivity">
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@={login.username}" />
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/editText"
-            android:layout_alignRight="@+id/editText"
-            android:layout_below="@+id/editText"
-            android:layout_marginTop="6dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:text="@={login.password}" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="6dp"
-            android:onClick="@{login.login}"
-            android:text="Button" />
-        <!--app:password="@{login.password}"
-        app:username="@{login.username}"-->
-
-    </RelativeLayout>
+        tools:context="com.kt31xing.srxkt.WelcomeActivity"></RelativeLayout>
 </layout>

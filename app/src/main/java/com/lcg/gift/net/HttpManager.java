@@ -152,7 +152,7 @@ public class HttpManager {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 handler.start();
-                String data = response.body().toString();
+                String data = response.body().string();
                 if (call.isCanceled())
                     return;
                 handler.netFinish();

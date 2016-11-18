@@ -54,4 +54,11 @@ public class BaseObservableMe extends BaseObservable {
     protected void notifyProgressDialogdismiss() {
         notifyProgressDialogdismiss(null);
     }
+
+    /**
+     * 开启一个activity
+     */
+    protected void startActivity(Class<? extends BaseActivity> clazz) {
+        activity.startActivity(clazz);
+    }
 }

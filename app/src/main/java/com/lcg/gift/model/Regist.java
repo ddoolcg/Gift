@@ -1,11 +1,17 @@
 package com.lcg.gift.model;
 
+import android.app.Activity;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.lcg.gift.BaseActivity;
+import com.lcg.gift.MyApplication;
+import com.lcg.gift.activity.MainActivity;
+import com.lcg.gift.bean.UserInfor;
 import com.lcg.gift.net.BaseDataHandler;
 import com.lcg.gift.net.HttpManager;
 import com.lcg.gift.utils.MD5;
+import com.lcg.gift.utils.StringUtils;
 import com.lcg.gift.utils.UIUtils;
 import com.lcg.gift.value.HttpUrl;
 
@@ -37,13 +43,12 @@ public class Regist extends Login {
     }
 
     public void regist(View view) {
-        String username = getUsername();
-        String password = getPassword();
-        //TODO 检查一下合法性
+        if (!check())
+            return;
         HashMap<String, String> map = new HashMap<>();
-        map.put("email", username);
-        map.put("pwd", MD5.GetMD5Code(password));
-        Call call = HttpManager.getInstance().post(HttpUrl.REGIST, map, new BaseDataHandler<String, String>() {
+        map.put("username", getUsername());
+        map.put("password", MD5.GetMD5Code(getPassword()));
+        Call call = HttpManager.getInstance().put(HttpUrl.AUTH, map, new BaseDataHandler<UserInfor, String>() {
             @Override
             public void onNetFinish() {
                 notifyProgressDialogdismiss();
@@ -59,10 +64,38 @@ public class Regist extends Login {
             }
 
             @Override
-            public void onSuccess(int code, String data) {
-                //TODO
+            public void onSuccess(int code, UserInfor data) {
+                MyApplication.getInstance().setUserInfor(data);
+                startActivity(MainActivity.class);
+                getActivity().setResult(Activity.RESULT_OK);
+                getActivity().finish();
             }
         });
         notifyProgressDialogShow("注册中...", call);
+    }
+
+    private boolean check() {
+        String username = getUsername();
+        String password = getPassword();
+        if (TextUtils.isEmpty(username)) {
+            UIUtils.showToastSafe("用户名不能为空");
+            return false;
+        } else if (!StringUtils.isEmail(username)) {
+            UIUtils.showToastSafe("请输入一个有效的邮箱地址");
+            return false;
+        } else if (TextUtils.isEmpty(password)) {
+            UIUtils.showToastSafe("密码不能为空");
+            return false;
+        } else if (password.length() <= 2) {
+            UIUtils.showToastSafe("密码必须大于两位");
+            return false;
+        } else if (TextUtils.isEmpty(repassword)) {
+            UIUtils.showToastSafe("重复密码不能为空");
+            return false;
+        } else if (!password.equals(repassword)) {
+            UIUtils.showToastSafe("两次密码不一致");
+            return false;
+        }
+        return true;
     }
 }

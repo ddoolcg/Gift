@@ -1,5 +1,6 @@
 package com.lcg.gift;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 
 import com.lcg.gift.dialog.ProgressDialog;
@@ -44,5 +45,8 @@ public class BaseActivity extends FragmentActivity {
             }
         }
     }
-
+    /**去另外一个页面*/
+    public void startActivity(Class<? extends BaseActivity> clazz) {
+        startActivity(new Intent(this, clazz));
+    }
 }

@@ -4,6 +4,8 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.os.Process;
 
+import com.lcg.gift.bean.UserInfor;
+
 import java.util.List;
 
 /**
@@ -17,6 +19,7 @@ import java.util.List;
 public class MyApplication extends Application {
     public long mThreadId;
     private static MyApplication instance;
+    private UserInfor userInfor;
 
     public static MyApplication getInstance() {
         return instance;
@@ -54,10 +57,28 @@ public class MyApplication extends Application {
         for (ActivityManager.RunningAppProcessInfo info : runningAppProcesses) {
             if (info.pid == myPid) {
                 if (!info.processName.contains(":")) {
+                    PreferenceHandler.getInstance().init(this);
                     //TODO
                 }
                 break;
             }
         }
+    }
+
+    /**
+     * 获取当前用户信息
+     */
+    public UserInfor getUserInfor() {
+        if (userInfor == null)
+            userInfor = PreferenceHandler.getInstance().getConfigFull(UserInfor.class);
+        return userInfor;
+    }
+
+    /**
+     * 设置当前用户信息
+     */
+    public void setUserInfor(UserInfor userInfor) {
+        PreferenceHandler.getInstance().setConfigFull(userInfor);
+        this.userInfor = userInfor;
     }
 }
