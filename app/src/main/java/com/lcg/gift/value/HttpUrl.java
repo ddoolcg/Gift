@@ -9,7 +9,7 @@ package com.lcg.gift.value;
  */
 
 public class HttpUrl {
-    private static final String HOST = "http://bddoo.tunnel.qydev.com/";
+    public static String HOST = "http://bddoo.tunnel.qydev.com/";
     /**
      * 错误日志
      */
@@ -27,4 +27,24 @@ public class HttpUrl {
      */
     public static final String PASSWORD = HOST + "password";
 
+    /**
+     * 积分兑换（post）
+     */
+    public static final String PINTS_COST = HOST + "pints/cost";
+    /**
+     * 历史（get）
+     */
+    public static final String PINTS_HISTORY = HOST + "pints/history";
+    /**
+     * 获取打劫人（get）与打劫（post）
+     */
+    public static final String ROB = HOST + "rob";
+    /**
+     * 分享信息
+     */
+    public static final String SHARE = HOST + "share";
+    /**
+     * 广告类型（get）
+     */
+    public static final String AD = HOST + "ad";
 }

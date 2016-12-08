@@ -137,7 +137,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             StringBuffer sb = new StringBuffer();
             String line;
             while ((line = reader.readLine()) != null) {
-                sb.append(line.trim() + "</br>");
+                sb.append(line.trim() + "<br/>");
             }
             reader.close();
             sendMsg(file, sb.toString());
@@ -175,7 +175,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         StringWriter info = new StringWriter();
         PrintWriter printWriter = new PrintWriter(info);
         ex.printStackTrace(printWriter);
-        String result = info.toString().replace("\n\t", "</br>");
+        String result = info.toString().replace("\n\t", "<br/>");
         printWriter.close();
         String localizedMessage = ex.getLocalizedMessage();
         localizedMessage = (localizedMessage == null) ? "null"
@@ -216,9 +216,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
 
         Set<String> keySet = mDeviceCrashInfo.keySet();
         StringBuffer sb = new StringBuffer();
-        sb.append(STACK_TRACE + ":</br>" + result + "</br>");
+        sb.append(STACK_TRACE + ":<br/>" + result + "<br/>");
         for (String key : keySet) {
-            sb.append(key + ":" + mDeviceCrashInfo.get(key) + "</br>");
+            sb.append(key + ":" + mDeviceCrashInfo.get(key) + "<br/>");
         }
         log.setContent(sb.toString());
     }

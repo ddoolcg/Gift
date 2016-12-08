@@ -60,7 +60,7 @@ public class Login extends BaseObservableMe {
         HashMap<String, String> map = new HashMap<>();
         map.put("username", username);
         map.put("password", MD5.GetMD5Code(password));
-        Call call = HttpManager.getInstance().post(HttpUrl.AUTH, map, new BaseDataHandler<UserInfor, String>() {
+        Call call = HttpManager.getInstance().put(HttpUrl.AUTH, map, new BaseDataHandler<UserInfor, String>() {
             @Override
             public void onNetFinish() {
                 notifyProgressDialogdismiss();

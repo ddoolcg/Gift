@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="rob"
+            type="com.lcg.gift.model.Rob" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:onClick="@{rob.rob}"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_robbery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{rob.nickname + @string/rob_points_ + rob.points + @string/coins}" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{rob.time}" />
+
+        <TextView
+            android:id="@+id/tv_click_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{rob.clickString}" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="cost"
+            type="com.lcg.gift.model.Cost" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/activity_cost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFF0"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/common_title"
+            app:data="@{cost}" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="话费充值" />
+
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_rectangle_gray_bg_white"
+            android:hint="您的手机号码"
+            android:inputType="phone"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:text="@={cost.phone}" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:orientation="horizontal"
+            app:listener="@{cost.listener}">
+
+            <RadioButton
+                android:id="@+id/rb_1"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="10元" />
+
+            <RadioButton
+                android:id="@+id/rb_2"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="50元" />
+
+            <RadioButton
+                android:id="@+id/rb_3"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="100元" />
+        </RadioGroup>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="6dp"
+            android:background="#87CEEB"
+            android:onClick="@{cost.recharge}"
+            android:text="充值" />
+    </LinearLayout>
+</layout>
+

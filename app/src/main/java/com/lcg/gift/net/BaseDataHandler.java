@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONType;
 import com.alibaba.fastjson.parser.Feature;
+import com.lcg.gift.MyApplication;
 import com.lcg.gift.bean.SimpleData;
 import com.lcg.gift.utils.L;
 import com.lcg.gift.utils.UIUtils;
@@ -45,7 +46,8 @@ public abstract class BaseDataHandler<S, E> implements DataHandler {
     @Override
     public void fail(final int code, String errorData) {
         L.w("NET", "code=" + code + " errorData=" + errorData + "");
-        if (code == 402) {//TODO 去登陆
+        if (code == 401) {
+            MyApplication.getInstance().gotoLoin();
         } else if (code == 403) {
             SimpleData simpleData = null;
             try {

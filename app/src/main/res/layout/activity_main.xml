@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout  xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data></data>
+    <data>
+
+        <variable
+            name="main"
+            type="com.lcg.gift.model.Main" />
+    </data>
 
     <LinearLayout
         android:id="@+id/activity_main"
@@ -11,78 +14,79 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/fl"
+        <TextView
+            android:id="@+id/tv_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFF0"
+            android:gravity="center_horizontal"
+            android:text="@{@string/my_wallet_ + main.points + @string/coins + main.titleTip}" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1">
 
-        <View style="@style/view_line_content" />
+            <Button
+                android:id="@+id/btn_depositors"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="#808080"
+                android:onClick="@{main.depositors}"
+                android:text="提现" />
 
-        <RelativeLayout
+            <Button
+                android:id="@+id/btn_histroy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FFFFE0"
+                android:onClick="@{main.histroy}"
+                android:text="收支历史" />
+
+            <Button
+                android:id="@+id/btn_cost"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="#ADFF2F"
+                android:onClick="@{main.cost}"
+                android:text="兑换" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <RadioGroup
-                android:id="@+id/rg"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/bg_item"
-                android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_ad"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="#FFD700"
+                android:onClick="@{main.ad}"
+                android:text="赚取佣金" />
 
-                <RadioButton
-                    android:id="@+id/rb_task"
-                    style="@style/main_tab"
-                    android:text="任务" />
+            <Button
+                android:id="@+id/btn_share"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FF4500"
+                android:onClick="@{main.share}"
+                android:text="分享得红包" />
 
-
-                <RadioButton
-                    android:id="@+id/rb_plunder"
-                    style="@style/main_tab"
-                    android:text="掠夺" />
-
-                <RadioButton
-                    android:id="@+id/rb_more"
-                    style="@style/main_tab"
-                    android:text="更多" />
-            </RadioGroup>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp">
-
-                <TextView
-                    android:id="@+id/tv_red_task"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/shape_red_dot"
-                    android:paddingLeft="25dp"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/tv_red_plunder"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/shape_red_dot"
-                    android:paddingLeft="25dp"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/tv_red_more"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/shape_red_dot"
-                    android:paddingLeft="25dp"
-                    android:visibility="invisible" />
-            </LinearLayout>
-        </RelativeLayout>
-
+            <Button
+                android:id="@+id/btn_get_4_other"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="#FFA500"
+                android:onClick="@{main.get4Other}"
+                android:text="@{@string/rob + main.robTip}" />
+        </LinearLayout>
     </LinearLayout>
 </layout>

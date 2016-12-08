@@ -1,9 +1,15 @@
 package com.lcg.gift;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 import com.lcg.gift.dialog.ProgressDialog;
+
+import java.util.ArrayList;
 
 import okhttp3.Call;
 
@@ -17,6 +23,20 @@ import okhttp3.Call;
 
 public class BaseActivity extends FragmentActivity {
     private ProgressDialog mProgressDialog;
+    public static ArrayList<BaseActivity> activities = new ArrayList<BaseActivity>();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activities.add(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        dismissProgressDialog(null);
+        activities.remove(this);
+        super.onDestroy();
+    }
 
     /**
      * 显示进度对话框
@@ -45,8 +65,15 @@ public class BaseActivity extends FragmentActivity {
             }
         }
     }
-    /**去另外一个页面*/
-    public void startActivity(Class<? extends BaseActivity> clazz) {
+
+    /**
+     * 去另外一个页面
+     */
+    public void startActivity(Class<? extends Activity> clazz) {
         startActivity(new Intent(this, clazz));
+    }
+
+    public void back(View v) {
+        finish();
     }
 }

@@ -2,8 +2,10 @@ package com.lcg.gift;
 
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Intent;
 import android.os.Process;
 
+import com.lcg.gift.activity.LoginActivity;
 import com.lcg.gift.bean.UserInfor;
 
 import java.util.List;
@@ -78,7 +80,16 @@ public class MyApplication extends Application {
      * 设置当前用户信息
      */
     public void setUserInfor(UserInfor userInfor) {
-        PreferenceHandler.getInstance().setConfigFull(userInfor);
+        if (this.userInfor != null && userInfor != null && !this.userInfor.equals(userInfor)) {
+            PreferenceHandler.getInstance().setConfigFull(userInfor);
+        }
         this.userInfor = userInfor;
+    }
+
+    public void gotoLoin() {
+        for (BaseActivity activity : BaseActivity.activities) {
+            activity.finish();
+        }
+        startActivity(new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }

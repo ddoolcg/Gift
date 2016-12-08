@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="data"
+            type="com.lcg.gift.BaseObservableMe" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:background="@null"
+                android:onClick="back"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="&lt;"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@{data.titleText}"
+                android:textColor="@color/text_black"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/btn_right"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:onClick="@{data.clickRight}"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textColor="@color/text_orange"
+                android:text="@{data.rightText}"
+                android:textSize="16dp"
+                android:visibility="@{(data==null || TextUtils.isEmpty(data.rightText)) ? View.INVISIBLE : View.VISIBLE}" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

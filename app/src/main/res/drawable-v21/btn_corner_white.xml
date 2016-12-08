@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/bg_item" >
+
+    <item>
+        <selector>
+            <item
+                android:drawable="@drawable/shape_btn_corner_disable"
+                android:state_enabled="false">
+            </item>
+            <item android:drawable="@drawable/shape_btn_corner_white_normal">
+            </item>
+        </selector>
+    </item>
+
+</ripple>

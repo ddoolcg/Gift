@@ -1,55 +1,95 @@
 package com.lcg.gift.bean;
 
-public class UserInfor {
-	private long id;
-	private String username;
-	private String password;
-	private String token;
-	private long lastLoginTime;
+import java.io.Serializable;
 
-	public UserInfor() {
-		super();
-		lastLoginTime = 0;
-		token = "";
-	}
+public class UserInfor implements Serializable {
+    private long id;
+    private String username;
+    private String token;
+    private long lastLoginTime;
+    private int points;
+    private String nickname;
+    private long robberyTime, robTime;
 
-	public long getId() {
-		return id;
-	}
+    public UserInfor() {
+        token = "";
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getToken() {
+        return token;
+    }
 
-	public String getToken() {
-		return token;
-	}
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public long getLastLoginTime() {
+        return lastLoginTime;
+    }
 
-	public long getLastLoginTime() {
-		return lastLoginTime;
-	}
+    public void setLastLoginTime(long lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
 
-	public void setLastLoginTime(long lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
-	}
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public long getRobberyTime() {
+        return robberyTime;
+    }
+
+    public void setRobberyTime(long robberyTime) {
+        this.robberyTime = robberyTime;
+    }
+
+    public long getRobTime() {
+        return robTime;
+    }
+
+    public void setRobTime(long robTime) {
+        this.robTime = robTime;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfor{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", token='" + token + '\'' +
+                ", lastLoginTime=" + lastLoginTime +
+                ", points=" + points +
+                ", nickname='" + nickname + '\'' +
+                ", robberyTime=" + robberyTime +
+                ", robTime=" + robTime +
+                '}';
+    }
 }

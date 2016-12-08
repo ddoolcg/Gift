@@ -1,8 +1,11 @@
 package com.lcg.gift.net;
 
 import android.os.Environment;
+import android.text.TextUtils;
 
 import com.android.annotations.NonNull;
+import com.lcg.gift.MyApplication;
+import com.lcg.gift.bean.UserInfor;
 import com.lcg.gift.utils.MD5;
 
 import java.io.File;
@@ -59,6 +62,9 @@ public class HttpManager {
     private Builder addHeaders() {
         Builder builder = new Builder()
                 .addHeader("Connection", "keep-alive").addHeader("ver", "1");
+        UserInfor userInfor = MyApplication.getInstance().getUserInfor();
+        if (userInfor != null && !TextUtils.isEmpty(userInfor.getToken()))
+            builder.addHeader("token", userInfor.getToken());
         return builder;
     }
 

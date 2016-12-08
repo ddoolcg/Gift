@@ -10,50 +10,57 @@
             type="com.lcg.gift.model.Regist" />
     </data>
 
-    <RelativeLayout
-        android:id="@+id/activity_welcome"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.kt31xing.srxkt.WelcomeActivity">
+        android:background="#FFFFF0"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:inputType="textEmailAddress"
-            android:text="@={regist.username}" />
+        <include
+            layout="@layout/common_title"
+            app:data="@{regist}" />
 
-        <EditText
-            android:id="@+id/et_password"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_username"
-            android:layout_marginTop="6dp"
-            android:inputType="textPassword"
-            android:text="@={regist.password}" />
-        <EditText
-            android:id="@+id/et_repassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_password"
-            android:layout_marginTop="6dp"
-            android:inputType="textPassword"
-            android:text="@={regist.repassword}" />
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_repassword"
-            android:layout_marginTop="6dp"
-            android:onClick="@{regist.regist}"
-            android:text="注册" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/et_username"
+                style="@style/edit"
+                android:layout_marginTop="8dp"
+                android:hint="用户名（邮箱地址）"
+                android:inputType="textEmailAddress"
+                android:text="@={regist.username}" />
+
+            <EditText
+                android:id="@+id/et_password"
+                style="@style/edit"
+                android:layout_marginTop="6dp"
+                android:ems="10"
+                android:hint="密码(3-10位)"
+                android:inputType="textPassword"
+                android:text="@={regist.password}" />
+
+            <EditText
+                android:id="@+id/et_repassword"
+                style="@style/edit"
+                android:layout_marginTop="6dp"
+                android:ems="10"
+                android:hint="重复密码"
+                android:inputType="textPassword"
+                android:text="@={regist.repassword}" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="6dp"
+                android:background="#87CEEB"
+                android:onClick="@{regist.regist}"
+                android:text="注册" />
+        </LinearLayout>
+    </LinearLayout>
 </layout>

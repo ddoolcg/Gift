@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/btn_pressed" >
+
+    <item>
+        <selector>
+            <item
+                android:drawable="@color/btn_disable"
+                android:state_enabled="false">
+            </item>
+            <item android:drawable="@color/btn_normal">
+            </item>
+        </selector>
+    </item>
+
+</ripple>

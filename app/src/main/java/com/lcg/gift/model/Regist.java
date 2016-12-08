@@ -48,7 +48,7 @@ public class Regist extends Login {
         HashMap<String, String> map = new HashMap<>();
         map.put("username", getUsername());
         map.put("password", MD5.GetMD5Code(getPassword()));
-        Call call = HttpManager.getInstance().put(HttpUrl.AUTH, map, new BaseDataHandler<UserInfor, String>() {
+        Call call = HttpManager.getInstance().post(HttpUrl.AUTH, map, new BaseDataHandler<UserInfor, String>() {
             @Override
             public void onNetFinish() {
                 notifyProgressDialogdismiss();

@@ -14,6 +14,8 @@ public class RegistActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityRegistBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_regist);
-        binding.setRegist(new Regist(this));
+        Regist regist = new Regist(this);
+        regist.setTitleText("注册");
+        binding.setRegist(regist);
     }
 }
