@@ -1,15 +1,16 @@
 package com.lcg.call.model;
 
-import android.support.annotation.NonNull;
+import android.databinding.Bindable;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.lcg.call.BR;
 import com.lcg.call.BaseObservableMe;
 import com.lcg.mylibrary.BaseActivity;
 import com.lcg.mylibrary.PreferenceHandler;
 import com.lcg.mylibrary.net.BaseDataHandler;
 import com.lcg.mylibrary.net.HttpManager;
-import com.lcg.mylibrary.utils.MD5;
+import com.lcg.mylibrary.utils.StringUtils;
 import com.lcg.mylibrary.utils.UIUtils;
 
 import java.util.HashMap;
@@ -24,62 +25,93 @@ import okhttp3.Call;
  * @since 2017/1/11 14:10
  */
 public class Main extends BaseObservableMe {
-    private String me, call, account;
+    private String me, call, account, balance;
     private boolean meEnable, accountEnable;
-    private static final String url = "http://118.178.35.162:8008/api/user2.0/call.php";
+    private static final String BALANCE_URL = "http://bddoo.tunnel.qydev.com/call";
+    private static final String CALL_URL = BALANCE_URL;
 
     public Main(BaseActivity activity) {
         super(activity);
         me = PreferenceHandler.getInstance().getString("me", "");
-        call = PreferenceHandler.getInstance().getString("call", "");
         account = PreferenceHandler.getInstance().getString("account", "");
         meEnable = TextUtils.isEmpty(me);
         accountEnable = TextUtils.isEmpty(account);
+        call = "";
+        balance = "";
+        balance();
+        call = PreferenceHandler.getInstance().getString("call", "");
     }
 
     public void commit(final View v) {
-        HashMap<String, String> map = getParams();
-        if (map == null)
+        if (TextUtils.isEmpty(me) || TextUtils.isEmpty(call) )
             return;
-        v.setEnabled(false);
-        Call call = HttpManager.getInstance().get(url, map, new BaseDataHandler<String, String>() {
+        if (!StringUtils.isPhone(call)) {
+            UIUtils.showToastSafe("请输入正确的手机号码！");
+            return;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("me", me);
+        map.put("call", call);
+        if (v != null)
+            v.setEnabled(false);
+        Call call = HttpManager.getInstance().post(CALL_URL, map, new BaseDataHandler<String,
+                String>() {
             @Override
             public void onNetFinish() {
                 notifyProgressDialogdismiss();
-                v.setEnabled(true);
-                PreferenceHandler.getInstance().setString("me", me);
-                PreferenceHandler.getInstance().setString("call", Main.this.call);
-                PreferenceHandler.getInstance().setString("account", account);
+                if (v != null)
+                    v.setEnabled(true);
+                PreferenceHandler handler = PreferenceHandler.getInstance();
+                handler.setString("me", me);
+                handler.setString("call", Main.this.call);
+                handler.setString("account", account);
+                String calls = handler.getString("calls", "");
+                if (TextUtils.isEmpty(calls)) {
+                    handler.setString("calls", Main.this.call);
+                } else {
+                    String[] split = calls.split(",");
+                    String s = Main.this.call;
+                    for (int i = 0; i < split.length && i < 20; i++) {
+                        if (!s.contains(split[i])) s += ("," + split[i]);
+                    }
+                    handler.setString("calls", s);
+                }
             }
 
             @Override
             public void onSuccess(int code, String data) {
-                UIUtils.showToastSafe("发起成功，请等待接听！");
+                UIUtils.showToastSafe(data);
                 getActivity().finish();
             }
         });
-        notifyProgressDialogShow("拨打中...",call);
+        notifyProgressDialogShow("拨打中...", call);
     }
 
-    @NonNull
-    public HashMap<String, String> getParams() {
-        if (TextUtils.isEmpty(me) || TextUtils.isEmpty(call) || TextUtils.isEmpty(account))
-            return null;
+    private void balance() {
+        if (TextUtils.isEmpty(me))
+            return;
         HashMap<String, String> map = new HashMap<>();
-        map.put("act", "call");
-        map.put("platform", "android");
-        map.put("multiAgent", "1");
-        map.put("versionCode", "8");
-        map.put("version", "2");
-        map.put("apiurl", "http://118.178.35.162:8008/api/user2.0");
-        map.put("isapi", "1");
-        map.put("cert", "0261");
-        map.put("softid", "6749");
-        map.put("mobile", me);
-        map.put("called", call);
-        map.put("account", account);
-        map.put("md5", MD5.GetMD5Code(me + map.get("softid") + call + "ysw"));
-        return map;
+        map.put("me", me);
+        HttpManager.getInstance().get(BALANCE_URL, map, new BaseDataHandler<String, String>() {
+            @Override
+            public void onNetFinish() {
+            }
+
+            @Override
+            public void onSuccess(int code, String data) {
+                if (!TextUtils.isEmpty(data) && data.startsWith("1")) {
+                    String[] split = data.split("\\|");
+                    if (split.length > 2) {
+                        try {
+                            Float valueOf = Float.valueOf(split[1]);
+                            setBalance("(剩余" + (int) (valueOf / 0.25f) + "分钟)");
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
     }
 
     public String getCall() {
@@ -120,5 +152,15 @@ public class Main extends BaseObservableMe {
 
     public void setAccountEnable(boolean accountEnable) {
         this.accountEnable = accountEnable;
+    }
+
+    @Bindable
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+        notifyPropertyChanged(BR.balance);
     }
 }

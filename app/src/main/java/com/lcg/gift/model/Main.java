@@ -117,7 +117,7 @@ public class Main extends BaseObservableMe {
         }
     };
     /**
-     * 获取打劫人
+     * 历史
      */
     private BaseDataHandler<ArrayList<com.lcg.gift.bean.History>, String> mHistorysHandler = new BaseDataHandler<ArrayList<com.lcg.gift.bean.History>, String>() {
 

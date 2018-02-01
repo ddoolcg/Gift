@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">回拨电话</string>
+    <string name="call">拨打电话</string>
 </resources>
